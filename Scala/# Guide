@@ -3,4 +3,4 @@ NumberSuite.scala     Example of a test set for 'NumberWriter.scala' (was origin
 NumberWriter.scala    Takes a whole number input and writes it out (e.g. '12345' becomes '12 thousand 345')
 
 2-StartingOut.sc	          Scala Worksheet - "Learn you a Haskell for great good!" Ch.2 (Scala conversion)
-3-TypesAndTypeclasses.sc    Scala Worksheet - "Learn you a Haskell for great good!" Ch.3 (Scala conversion)
+3-TypesAndTypeclasses.sc      Scala Worksheet - "Learn you a Haskell for great good!" Ch.3 (Scala conversion)
