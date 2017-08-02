@@ -23,7 +23,7 @@ Haskell to Scala conversion - Learn You Haskell for Great Good!
 = = = = = =
 Chapters:
 
-2-StartingOut.sc	          Scala Worksheet - "Learn you a Haskell for great good!" Ch.2 (Scala conversion)
+2-StartingOut.sc	            Scala Worksheet - "Learn you a Haskell for great good!" Ch.2 (Scala conversion)
 3-TypesAndTypeclasses.sc      Scala Worksheet - "Learn you a Haskell for great good!" Ch.3 (Scala conversion)
-4-
-5-
+4-SyntaxInFunctions           Scala Worksheet - "Learn you a Haskell for great good!" Ch.4 (Scala conversion)
+5-Recursion                   Scala Worksheet - "Learn you a Haskell for great good!" Ch.5 (Scala conversion)
