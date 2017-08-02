@@ -1,65 +1,67 @@
-import org.scalatest.FunSuite
-import util._
-import java.io.StringBufferInputStream
-import scala.Console.setIn
+
+import scala.annotation.tailrec
 
 /**
   * Created by Administrator on 18/07/2017.
   */
 
-class NumberSuite extends FunSuite
-{
+object Main {
 
-  test("Input a valid number.")
-  {
-    Main.printNum(12345)
+  type LongFormat = String
+  type ShortFormat = String
+
+
+  val shortList: List[ShortFormat] = List(" ","thousand","million","billion",
+    "trillion","quadrillion","quintillion","sextillion")
+
+  val longList: List[LongFormat] = List(" ","thousand","million","milliard",
+    "billion","billiard","trillion","trilliard")
+
+  val shortFormat: Int =>String = (index: Int) =>  shortList(index)
+
+  val longFormat: Int => String = (index: Int) =>  longList(index)
+
+
+  def main(args: Array[String]): Unit = {
+    val num = getInput(0)
+    println("Short format is: " + getFormat(num)(shortFormat))
+    println("Long format is: " + getFormat(num)(longFormat))
   }
 
-  test("Input an invalid, negative number.")
-  {
-    val error = intercept[Exception] {Main.printNum(-1)}
-    assert(error.getMessage === "For input string: \"-\"")
+  @tailrec
+  def getInput(count: Int): BigInt = {
+
+    val input = util.Try(BigInt(readLine("Please input a number: ")))
+
+    input match {
+      case util.Success(v) => v
+      case util.Failure(e) =>
+        println("Error: invalid value.")
+        count + 1 match{
+          case x if x>=3 => 0
+          case x => getInput(x)
+        }
+    }
   }
 
-  test("Input an invalid string instead of a number.")
-  {
-    val error = intercept[Exception] {Main.printNum("abc".toLong)}
-    assert(error.getMessage === "For input string: \"abc\"")
-  }
+  def getFormat(num: BigInt)(format: Int=>String): String ={
+    if(num.toString.length<=(shortList.length*3)) {
+      val orderedNumber = num.toString.reverse.grouped(3).toList
+      val len = orderedNumber.length - 1
 
-  test("Try to input a number with enough digits to trigger part of the buildOut function.")
-  {
-    Main.printNum(1234567890)
-  }
+      orderedNumber.reverse.zipWithIndex.map{case (x,y) => {
+        val resString = x.reverse
+        if(resString!="000") {
+          val resFormat = format(len - y)
+          s"${resString.replaceFirst("^0+(?!$)","")} $resFormat "
+        }else{
+          ""
+        }
+      }}.mkString("").trim
 
-
-  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc.")
-  {
-    Main.printNum(1000000000.toLong)
-  }
-
-  test("Test Main method")
-  {
-    val theMsg = new StringBufferInputStream("1234567890987654321")
-    setIn(theMsg)
-    Main.main(Array())
-
-  }
-
-  test("Test startUp by feeding it a message and some input")
-  {
-    //val theInput = 123456789
-    val theMsg = new StringBufferInputStream("1234567890987654321")
-    setIn(theMsg)
-    Main.startUp("", 0)
-  }
-
-  test("Test startUp by feeding it a message and some invalid input")
-  {
-    //val theInput = 123456789
-    val theMsg = new StringBufferInputStream("abcdef")
-    setIn(theMsg)
-    Main.startUp("", 0)
+    }else{
+      "Sorry, index is out of range."
+    }
   }
 
 }
