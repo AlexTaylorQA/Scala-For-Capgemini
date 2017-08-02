@@ -1,3 +1,6 @@
+Application.scala     Contains examples of Scala functions in a Scala Play environment, called from a 'routes' file via URL.
+                      Also contains examples of accessing and performing CRUD operations on a MongoDB collection from Scala.
+
 Blackjack.scala       Contains 3 functions:
                       - blackjack (compare scores to see who won a game of Blackjack; over 21 is also a loss.)
                       - uniqueSum (finds the sum of all unique numbers from a given input)
