@@ -1,67 +1,55 @@
-
-import scala.annotation.tailrec
+import org.scalatest.FunSuite
+import util._
+import java.io.StringBufferInputStream
+import scala.Console.setIn
 
 /**
   * Created by Administrator on 18/07/2017.
   */
 
-object Main {
+class NumberSuite extends FunSuite
+{
 
-  type LongFormat = String
-  type ShortFormat = String
-
-
-  val shortList: List[ShortFormat] = List(" ","thousand","million","billion",
-    "trillion","quadrillion","quintillion","sextillion")
-
-  val longList: List[LongFormat] = List(" ","thousand","million","milliard",
-    "billion","billiard","trillion","trilliard")
-
-  val shortFormat: Int =>String = (index: Int) =>  shortList(index)
-
-  val longFormat: Int => String = (index: Int) =>  longList(index)
-
-
-  def main(args: Array[String]): Unit = {
-    val num = getInput(0)
-    println("Short format is: " + getFormat(num)(shortFormat))
-    println("Long format is: " + getFormat(num)(longFormat))
+  test("Input a valid number (shortform).")
+  {
+    Main.getFormat(1234567890)(Main.shortFormat)
   }
 
-  @tailrec
-  def getInput(count: Int): BigInt = {
-
-    val input = util.Try(BigInt(readLine("Please input a number: ")))
-
-    input match {
-      case util.Success(v) => v
-      case util.Failure(e) =>
-        println("Error: invalid value.")
-        count + 1 match{
-          case x if x>=3 => 0
-          case x => getInput(x)
-        }
-    }
+  test("Input a valid number (longform).")
+  {
+    Main.getFormat(1234567890)(Main.longFormat)
   }
 
-  def getFormat(num: BigInt)(format: Int=>String): String ={
-    if(num.toString.length<=(shortList.length*3)) {
-      val orderedNumber = num.toString.reverse.grouped(3).toList
-      val len = orderedNumber.length - 1
+  test("Input a negative number.")
+  {
+    Main.getFormat((-1234567890))(Main.longFormat)
+  }
 
-      orderedNumber.reverse.zipWithIndex.map{case (x,y) => {
-        val resString = x.reverse
-        if(resString!="000") {
-          val resFormat = format(len - y)
-          s"${resString.replaceFirst("^0+(?!$)","")} $resFormat "
-        }else{
-          ""
-        }
-      }}.mkString("").trim
+  test("Input zero.")
+  {
+    Main.getFormat(0)(Main.shortFormat)
+  }
+  
+  test("Input an invalid string instead of a number.")
+  {
+    val error = intercept[Exception] {Main.getFormat("abc".toLong)(Main.shortFormat)}
+    assert(error.getMessage === "For input string: \"abc\"")
+  }
 
-    }else{
-      "Sorry, index is out of range."
-    }
+  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc (shortformat).")
+  {
+    Main.getFormat(1000000000)(Main.shortFormat)
+  }
+
+  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc (longformat).")
+  {
+    Main.getFormat(1000000000)(Main.longFormat)
+  }
+
+  test("Try to input a number with more digits than 'BigInt' can handle (i.e. out of range index). Program should catch this.")
+  {
+    Main.getFormat(BigInt("1234567898765432123456789876543212345678987654321"))(Main.shortFormat)
   }
 
 }
+
