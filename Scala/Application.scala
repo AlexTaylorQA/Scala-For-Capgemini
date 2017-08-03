@@ -139,13 +139,6 @@ class Application @Inject()(val reactiveMongoApi: ReactiveMongoApi, val messages
     }
   }
 
-  /*
-  def helloChangeCookie(newName:String) = Action{ implicit request =>
-    request.cookies.get("theme").get.name = "newName"
-    Ok()
-  }
-  */   // Attempted to rename cookie. Cookie name is a val so this failed.
-
  // Discards a created cookie with a specific identifier ('theme').
   def helloDiscardCookie = Action {
     Ok("The cookie was deleted.").discardingCookies(DiscardingCookie("theme"))
