@@ -108,23 +108,33 @@ object Main
       var num2 = numList((i+1)%numList.size)
       var num3 = numList((i+2)%numList.size)
 
-      if(num1 + num2 == num3) {
-        println(num1 + " + " + num2 + " = " + num3)
-      }
-      if(num1 * num2 == num3) {
-        println(num1 + " x " + num2 + " = " + num3)
-      }
-      if(num2!=0)
-        if(num1 / num2 == num3 && num1 % num2 == 0) {
-          println(num1 + " / " + num2 + " = " + num3)
-        }
-      if (num1!= num2)
-      if(num1 - num2 == num3) {
-        println(num1 + " + " + num2 + " = " + num3)
+      num1 + num2 match {
+        case num3 => println(num1 + " + " + num2 + " = " + num3)
+        case _ =>
       }
 
+      num1 * num2 match {
+        case num3 => println(num1 + " x " + num2 + " = " + num3)
+        case _ =>
+      }
+
+      num2 != 0 match {
+        case true => (num1 / num2 == num3 && num1 % num2 == 0) match
+        {
+          case true => println(num1 + " / " + num2 + " = " + num3)
+          case _ =>
+        }
+        case _ =>
+      }
+
+      num1 != num2 match {
+        case true => (num1 - num2 == num3) match {
+          case true => println(num1 + " + " + num2 + " = " + num3)
+          case _ =>
+        }
+        case _ =>
+      }
     }
     println()
   }
-
 }
