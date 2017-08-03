@@ -1,11 +1,4 @@
 import org.scalatest.FunSuite
-import util._
-import java.io.StringBufferInputStream
-import scala.Console.setIn
-
-/**
-  * Created by Administrator on 18/07/2017.
-  */
 
 class NumberSuite extends FunSuite
 {
@@ -29,7 +22,7 @@ class NumberSuite extends FunSuite
   {
     Main.getFormat(0)(Main.shortFormat)
   }
-  
+
   test("Input an invalid string instead of a number.")
   {
     val error = intercept[Exception] {Main.getFormat("abc".toLong)(Main.shortFormat)}
