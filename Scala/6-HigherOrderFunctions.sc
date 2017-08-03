@@ -39,10 +39,6 @@ applyTwice((_ `+` " HAHA"), "HEY")
 // = "HEY" + " HAHA" + " HAHA" = "HEY HAHA HAHA"
 
 applyTwice((multThree(2)(2)_).asInstanceOf[Any=>Any], 9)
-// = 2 * 2 * (2 * 2 * (9)) = (4 * 4 * 9) = (4 * 36) = 144
-
-/*
-def zipWith(f:Any => Any, x:List[Int], y:List[Int]) = f((x)(y))
-
-zipWith(`+`_, List(1), List(2))
-*/
+// = 2 * 2 * (2 * 2 * (9)) 
+// = (4 * 4 * 9) = (4 * 36) 
+// = 144
