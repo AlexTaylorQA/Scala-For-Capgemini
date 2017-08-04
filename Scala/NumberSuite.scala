@@ -1,65 +1,48 @@
 import org.scalatest.FunSuite
-import util._
-import java.io.StringBufferInputStream
-import scala.Console.setIn
-
-/**
-  * Created by Administrator on 18/07/2017.
-  */
 
 class NumberSuite extends FunSuite
 {
 
-  test("Input a valid number.")
+  test("Input a valid number (shortform).")
   {
-    Main.printNum(12345)
+    Main.getFormat(1234567890)(Main.shortFormat)
   }
 
-  test("Input an invalid, negative number.")
+  test("Input a valid number (longform).")
   {
-    val error = intercept[Exception] {Main.printNum(-1)}
-    assert(error.getMessage === "For input string: \"-\"")
+    Main.getFormat(1234567890)(Main.longFormat)
+  }
+
+  test("Input a negative number.")
+  {
+    Main.getFormat((-1234567890))(Main.longFormat)
+  }
+
+  test("Input zero.")
+  {
+    Main.getFormat(0)(Main.shortFormat)
   }
 
   test("Input an invalid string instead of a number.")
   {
-    val error = intercept[Exception] {Main.printNum("abc".toLong)}
+    val error = intercept[Exception] {Main.getFormat("abc".toLong)(Main.shortFormat)}
     assert(error.getMessage === "For input string: \"abc\"")
   }
 
-  test("Try to input a number with enough digits to trigger part of the buildOut function.")
+  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc (shortformat).")
   {
-    Main.printNum(1234567890)
+    Main.getFormat(1000000000)(Main.shortFormat)
   }
 
-
-  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc.")
+  test("Try to input a number with a sequence of zeroes in the scope of \"thousand\", \"million\", etc (longformat).")
   {
-    Main.printNum(1000000000.toLong)
+    Main.getFormat(1000000000)(Main.longFormat)
   }
 
-  test("Test Main method")
+  test("Try to input a number with more digits than 'BigInt' can handle (i.e. out of range index). Program should catch this.")
   {
-    val theMsg = new StringBufferInputStream("1234567890987654321")
-    setIn(theMsg)
-    Main.main(Array())
-
-  }
-
-  test("Test startUp by feeding it a message and some input")
-  {
-    //val theInput = 123456789
-    val theMsg = new StringBufferInputStream("1234567890987654321")
-    setIn(theMsg)
-    Main.startUp("", 0)
-  }
-
-  test("Test startUp by feeding it a message and some invalid input")
-  {
-    //val theInput = 123456789
-    val theMsg = new StringBufferInputStream("abcdef")
-    setIn(theMsg)
-    Main.startUp("", 0)
+    Main.getFormat(BigInt("1234567898765432123456789876543212345678987654321"))(Main.shortFormat)
   }
 
 }
+

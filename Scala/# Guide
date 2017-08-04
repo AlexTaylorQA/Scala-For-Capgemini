@@ -1,6 +1,29 @@
+Application.scala     Contains examples of Scala functions in a Scala Play environment, called from a 'routes' file via URL.
+                      Also contains examples of accessing and performing CRUD operations on a MongoDB collection from Scala.
+
+Blackjack.scala       Contains 3 functions:
+                      - blackjack (compare scores to see who won a game of Blackjack; over 21 is also a loss.)
+                      - uniqueSum (finds the sum of all unique numbers from a given input)
+                      - tooHot (takes a temperature and determines if it is 'too hot'; has leeway if it is Summer.)
+                      
+                      
 Cypher.scala          Example of the atbash cypher. Inputs a string and outputs the cyphered string.
+
+Hangman.scala         Plays a game of 'Hangman' with the user. The word used is randomly selected from an SQL database.
+
 NumberSuite.scala     Example of a test set for 'NumberWriter.scala' (was originally called 'Main.scala')
+
 NumberWriter.scala    Takes a whole number input and writes it out (e.g. '12345' becomes '12 thousand 345')
 
-2-StartingOut.sc	          Scala Worksheet - "Learn you a Haskell for great good!" Ch.2 (Scala conversion)
+Garage (scala)        Contains the .scala files for a 'Garage' project.
+
+- - - 
+
+Haskell to Scala conversion - Learn You Haskell for Great Good!
+= = = = = =
+Chapters:
+
+2-StartingOut.sc	            Scala Worksheet - "Learn you a Haskell for great good!" Ch.2 (Scala conversion)
 3-TypesAndTypeclasses.sc      Scala Worksheet - "Learn you a Haskell for great good!" Ch.3 (Scala conversion)
+4-SyntaxInFunctions           Scala Worksheet - "Learn you a Haskell for great good!" Ch.4 (Scala conversion)
+5-Recursion                   Scala Worksheet - "Learn you a Haskell for great good!" Ch.5 (Scala conversion)
