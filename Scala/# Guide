@@ -9,13 +9,13 @@ Blackjack.scala       Contains 3 functions:
                       
 Cypher.scala          Example of the atbash cypher. Inputs a string and outputs the cyphered string.
 
-Hangman.scala         Plays a game of 'Hangman' with the user. The word used is randomly selected from an SQL database.
-
 NumberSuite.scala     Example of a test set for 'NumberWriter.scala' (was originally called 'Main.scala')
 
 NumberWriter.scala    Takes a whole number input and writes it out (e.g. '12345' becomes '12 thousand 345')
 
 Garage (scala)        Contains the .scala files for a 'Garage' project.
+
+Hangman               Plays a game of Hangman. The word used in the game is randomly selected from a database.
 
 - - - 
 
@@ -27,3 +27,4 @@ Chapters:
 3-TypesAndTypeclasses.sc      Scala Worksheet - "Learn you a Haskell for great good!" Ch.3 (Scala conversion)
 4-SyntaxInFunctions           Scala Worksheet - "Learn you a Haskell for great good!" Ch.4 (Scala conversion)
 5-Recursion                   Scala Worksheet - "Learn you a Haskell for great good!" Ch.5 (Scala conversion)
+6-HigherOrderFunctions        Scala Worksheet - "Learn you a Haskell for great good!" Ch.6 (Scala conversion)
