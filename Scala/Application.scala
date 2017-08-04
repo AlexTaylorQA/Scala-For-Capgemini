@@ -67,23 +67,14 @@ class Application @Inject()(val reactiveMongoApi: ReactiveMongoApi, val messages
   }
 
  // Edits an existing movie in the Mongo DB, then goes to the View Page to display the edit.
-  def doEdit = Action { implicit request: Request[AnyContent] =>
+def doEdit = Action { implicit request: Request[AnyContent] =>
     val formValidationResult = movies.createMovieForm.bindFromRequest
     formValidationResult.fold({
       formWithErrors =>
         BadRequest(views.html.theView(movies.theMovies, formWithErrors))
     }, { widget =>
-
-      val modifier = Json.obj("$set" -> Json.obj("title"->widget.title,
-        "description"->widget.description,
-        "price"->widget.price,
-        "director" -> widget.director,
-        "starring" -> widget.starring,
-        "rating" -> widget.rating
-      ))
-
-      collection.map{
-        _.findAndUpdate(Json.obj("mID"->widget.mID),modifier)
+        collection.map{
+        _.findAndUpdate(Json.obj("mID"->widget.mID),widget)
       }
 
       Redirect(routes.Application.listMovies)
